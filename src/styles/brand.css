@@ -1,0 +1,28 @@
+/*
+ * Brand skinning layer. v0.1 exposes only the accent color pair as CSS
+ * variables; the full token surface (ramps, semantic tokens) lives in
+ * `@buena/brand/tokens` as JS constants. As consuming apps need to
+ * override more, promote individual tokens into this file.
+ *
+ * Consuming apps opt in by setting the attribute on <html>:
+ *   <html data-brand="atho">
+ *
+ * Defaults (no data-brand attribute) match the Atho skin so the
+ * showcase renders correctly out of the box.
+ */
+
+:root {
+  --color-accent: #a7be5a;
+  --color-accent-deep: #80ac1a;
+}
+
+:root[data-brand='atho'] {
+  --color-accent: #a7be5a;
+  --color-accent-deep: #80ac1a;
+}
+
+:root[data-brand='carespace'] {
+  /* Placeholder until Carespace picks their accent. */
+  --color-accent: #6493b0;
+  --color-accent-deep: #1a6390;
+}

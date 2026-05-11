@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Theme tokens for the showcase site. Defined as space-separated `r g b`
+ * triples so Tailwind's `rgb(var(--token) / <alpha-value>)` template can
+ * layer in the opacity modifier from utilities like `bg-bg-app/80`. The
+ * showcase flips theme at runtime via `data-theme="light"` on <html>.
+ *
+ * These tokens are bundled into the showcase SPA only — they're not
+ * exposed via the library `@buena/brand/styles.css` export, which ships
+ * only the data-brand accent layer. As consuming apps need to override
+ * these, promote them into `brand.css`.
+ */
+:root,
+[data-theme='dark'] {
+  --color-bg-app: 15 17 20;
+  --color-bg-panel: 21 24 28;
+  --color-bg-elevated: 28 32 39;
+  --color-stroke: 42 46 53;
+  --color-muted: 119 119 119;
+  --color-ink: 9 11 12;
+  --color-fg: 255 255 255;
+  --color-fg-on-accent: 9 11 12;
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  --color-bg-app: 255 255 255;
+  --color-bg-panel: 247 248 250;
+  --color-bg-elevated: 238 240 244;
+  --color-stroke: 215 218 224;
+  --color-muted: 110 114 122;
+  --color-ink: 9 11 12;
+  --color-fg: 9 11 12;
+  --color-fg-on-accent: 255 255 255;
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+html,
+body {
+  overscroll-behavior: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+body {
+  @apply bg-bg-app font-sans;
+  color: rgb(var(--color-fg));
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.scroll-quiet {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.stroke') transparent;
+}
+.scroll-quiet::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.scroll-quiet::-webkit-scrollbar-thumb {
+  background-color: theme('colors.stroke');
+  border-radius: 6px;
+}
+
+/*
+ * Light-theme utility overrides — Tailwind compiles `text-white`,
+ * `bg-white`, etc. with hardcoded RGB so we can't theme them through
+ * CSS variables alone. In light mode we re-bind those classes to the
+ * inverse color, keeping component code that uses text-white / bg-white
+ * working without a sweeping refactor.
+ */
+[data-theme='light'] .text-white { color: rgb(var(--color-fg)); }
+[data-theme='light'] .text-white\/90 { color: rgb(var(--color-fg) / 0.9); }
+[data-theme='light'] .text-white\/80 { color: rgb(var(--color-fg) / 0.8); }
+[data-theme='light'] .text-white\/70 { color: rgb(var(--color-fg) / 0.7); }
+[data-theme='light'] .text-white\/60 { color: rgb(var(--color-fg) / 0.6); }
+[data-theme='light'] .text-white\/50 { color: rgb(var(--color-fg) / 0.5); }
+[data-theme='light'] .text-white\/40 { color: rgb(var(--color-fg) / 0.4); }
+[data-theme='light'] .text-white\/30 { color: rgb(var(--color-fg) / 0.3); }
+[data-theme='light'] .hover\:text-white:hover { color: rgb(var(--color-fg)); }
+
+[data-theme='light'] .text-ink { color: rgb(var(--color-fg-on-accent)); }
+
+[data-theme='light'] .bg-white { background-color: rgb(var(--color-fg)); }
+[data-theme='light'] .bg-white\/\[0\.04\] { background-color: rgb(var(--color-fg) / 0.04); }
+[data-theme='light'] .bg-white\/\[0\.02\] { background-color: rgb(var(--color-fg) / 0.02); }
+[data-theme='light'] .hover\:bg-white\/\[0\.04\]:hover { background-color: rgb(var(--color-fg) / 0.04); }
+
+[data-theme='light'] .border-white { border-color: rgb(var(--color-fg)); }
+[data-theme='light'] .border-white\/40 { border-color: rgb(var(--color-fg) / 0.4); }
+[data-theme='light'] .border-white\/30 { border-color: rgb(var(--color-fg) / 0.3); }
+[data-theme='light'] .focus\:border-white\/40:focus { border-color: rgb(var(--color-fg) / 0.4); }
+[data-theme='light'] .hover\:border-white\/40:hover { border-color: rgb(var(--color-fg) / 0.4); }
+
+[data-theme='light'] .ring-white { --tw-ring-color: rgb(var(--color-fg)); }
+[data-theme='light'] .accent-white { accent-color: rgb(var(--color-fg)); }
+[data-theme='light'] .outline-white { outline-color: rgb(var(--color-fg)); }

@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist/lib",
+    "rootDir": "./src",
+    "allowImportingTsExtensions": false,
+    "types": []
+  },
+  "include": ["src/tokens", "src/icons", "src/index.ts"],
+  "exclude": ["src/showcase"]
+}
