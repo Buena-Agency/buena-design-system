@@ -1,3 +1,9 @@
+/* Satoshi Variable — the brand typeface. The Fontshare URL serves the
+ * full weight range (300/400/500/700/900) as separate font files; the
+ * `font-family: Satoshi` referenced from tailwind.config.ts + the body
+ * `font-sans` utility picks the right weight per font-weight rule. */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

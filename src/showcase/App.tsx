@@ -47,7 +47,7 @@ function BrandSkinPicker({
         borderRadius: 8,
         background: 'rgb(var(--color-bg-panel))',
         border: '1px solid rgb(var(--color-stroke))',
-        fontFamily: 'system-ui, sans-serif',
+        fontFamily: '"Satoshi", system-ui, sans-serif',
         fontSize: 11,
         color: 'rgb(var(--color-fg))',
       }}

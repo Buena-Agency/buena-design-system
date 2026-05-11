@@ -523,7 +523,7 @@ function SectionTypography() {
     <Section
       id="typography"
       title="Typography"
-      description="Apple HIG inspired scale. 600 weight on titles, 500 on callouts and captions, 400 on body."
+      description="Satoshi Variable. Apple HIG inspired scale — 600 weight on titles, 500 on callouts and captions, 400 on body."
     >
       <div
         className="rounded-lg divide-y"
@@ -557,7 +557,7 @@ function SectionTypography() {
                   fontVariantNumeric: 'tabular-nums',
                 }}
               >
-                {t.size}/{t.leading} · {weightLabel(t.weight)}
+                {t.size}/{t.leading} · {t.weight} {weightLabel(t.weight)}
               </div>
               <div style={{ ...typeStyle(key), color: c('text-primary') }}>
                 The quick brown fox jumps over the lazy dog
