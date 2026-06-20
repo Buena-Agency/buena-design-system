@@ -14,7 +14,7 @@ for the install checklist and the `CLAUDE.md` rule to paste into the app.
 ## Install
 
 ```sh
-npm install github:dougburnett/buena-design-system#v0.2.0
+npm install github:Buena-Agency/buena-design-system#v0.2.0
 ```
 
 npm clones the repo, runs the `prepare` script to build `dist/lib`,
