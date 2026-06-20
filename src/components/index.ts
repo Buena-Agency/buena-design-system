@@ -1,10 +1,12 @@
-// @buena/brand components. Import the styles once in your app entry:
+// @buena/brand components, organized by atomic-design layer. Import the
+// styles once in your app entry:
 //   import '@buena/brand/styles.css';
 //   import '@buena/brand/components.css';
 // then use the components:
-//   import { Button, Input, Switch } from '@buena/brand/components';
-export * from './Button';
-export * from './Form';
-export * from './Display';
-export * from './Feedback';
-export * from './Tabs';
+//   import { Button, Text, Surface, MenuItem, Menu, Modal } from '@buena/brand/components';
+//
+// Layering rule: molecules compose atoms, organisms compose molecules + atoms.
+// Nothing re-creates an atom from scratch.
+export * from './atoms';
+export * from './molecules';
+export * from './organisms';

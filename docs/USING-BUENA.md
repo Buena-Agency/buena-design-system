@@ -7,7 +7,7 @@ so the agent reaches for the system by default, then follow the checklist.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.2.0
+npm install github:Buena-Agency/buena-design-system#v0.3.0
 ```
 
 ## New-app checklist
@@ -49,10 +49,18 @@ npm install github:Buena-Agency/buena-design-system#v0.2.0
 
 This app's UI is built on `@buena/brand`. Non-negotiable:
 
-- **Components** come from `@buena/brand/components` (Button, IconButton, Input,
-  Textarea, Field, Label, Checkbox, Radio, Switch, Badge, Chip, Tag, Card,
-  Divider, Avatar, Pill, Alert, Spinner, Skeleton, Tooltip, Tabs/Tab). Do not
-  hand-roll an element the system already provides.
+- **Components** come from `@buena/brand/components`, organized atoms →
+  molecules → organisms. Do not hand-roll an element the system already
+  provides, and **never re-create an atom** — compose the existing one.
+  - Atoms: Text, Link, Kbd, Code, Icon, Surface, Stack, Inline, Divider,
+    VisuallyHidden, Card, Button, IconButton, Pill, Label, Input, Textarea,
+    Checkbox, Radio, Switch, Badge, Chip, Tag, Avatar, StatusDot, Spinner, Skeleton.
+  - Molecules: Field, Alert, Banner, Toast, Tooltip, Tabs/Tab, Breadcrumb,
+    Pagination, SegmentedControl, MenuItem, ListItem, ButtonGroup, AvatarGroup,
+    SearchInput, Stat.
+  - Organisms: Menu/MenuItem/MenuDivider/MenuLabel, Modal, EmptyState.
+- **All text uses the `Text` atom** (`<Text variant="title1">`) — never a raw
+  `font-size`. **All icons use the `Icon` atom** over `@buena/brand/icons`.
 - **Colors, spacing, radius, type** come from tokens — use the CSS variables
   (`var(--color-bg-med)`, `var(--space-lg)`, `var(--radius-lg)`, `var(--text-body)`),
   the Tailwind preset utilities, or `@buena/brand/tokens`. **Never write a raw

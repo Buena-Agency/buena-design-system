@@ -14,7 +14,7 @@ for the install checklist and the `CLAUDE.md` rule to paste into the app.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.2.0
+npm install github:Buena-Agency/buena-design-system#v0.3.0
 ```
 
 npm clones the repo, runs the `prepare` script to build `dist/lib`,
@@ -43,12 +43,22 @@ import { IconSettings } from '@buena/brand/icons';
 
 v0.2.0 exposes:
 
-- **`@buena/brand/components`** — React components whose props mirror the
-  Figma variant properties: `Button`, `IconButton`, `Input`, `Textarea`,
-  `Field`, `Label`, `Checkbox`, `Radio`, `Switch`, `Badge`, `Chip`, `Tag`,
-  `Card`, `Divider`, `Avatar`, `Pill`, `Alert`, `Spinner`, `Skeleton`,
-  `Tooltip`, `Tabs`/`Tab`. Each resolves to the CSS variables, so they flip
-  with `data-theme` and re-skin with `data-brand` automatically.
+- **`@buena/brand/components`** — React components organized by atomic-design
+  layer (`src/components/atoms`, `/molecules`, `/organisms`). Molecules compose
+  atoms; organisms compose molecules + atoms; nothing re-creates an atom.
+  - **Atoms:** `Text`, `Link`, `Kbd`, `Code`, `Icon`, `Surface`, `Stack`,
+    `Inline`, `Divider`, `VisuallyHidden`, `Card`, `Button`, `IconButton`,
+    `Pill`, `Label`, `Input`, `Textarea`, `Checkbox`, `Radio`, `Switch`,
+    `Badge`, `Chip`, `Tag`, `Avatar`, `StatusDot`, `Spinner`, `Skeleton`.
+  - **Molecules:** `Field`, `Alert`, `Banner`, `Toast`, `Tooltip`, `Tabs`/`Tab`,
+    `Breadcrumb`, `Pagination`, `SegmentedControl`, `MenuItem`, `ListItem`,
+    `ButtonGroup`, `AvatarGroup`, `SearchInput`, `Stat`.
+  - **Organisms:** `Menu` (+ `MenuItem`, `MenuDivider`, `MenuLabel`), `Modal`,
+    `EmptyState`.
+
+  `Text` keys to the type scale (`variant="title1"`), `Icon` standardizes
+  size/color over the SVG set, and every component resolves to the CSS
+  variables — so they flip with `data-theme` and re-skin with `data-brand`.
 - **`@buena/brand/styles.css`** — the full token surface as CSS variables:
   ramp primitives (`--color-green-700`), semantic tokens that flip per
   `data-theme` (`--color-bg-med`, `--color-text-primary`, …), spacing
