@@ -7,3 +7,4 @@ export * from './button'; // Button, IconButton, Pill
 export * from './inputs'; // Label, Input, Textarea, Checkbox, Radio, Switch
 export * from './data'; // Badge, Chip, Tag, Avatar, StatusDot, Spinner, Skeleton
 export * from './form'; // Slider, ProgressBar, ColorSwatch
+export * from './dataviz'; // Sparkline, ProgressRing, Meter, CHART_COLORS, STATUS_COLORS

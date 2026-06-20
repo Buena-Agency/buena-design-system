@@ -10,3 +10,5 @@ export * from './overlays'; // Tray, BottomSheet, CommandPalette, SnackbarQueue,
 export * from './carousel'; // Carousel
 export * from './calendar'; // Calendar
 export * from './tree'; // TreeView
+export * from './leaderboard'; // Leaderboard
+export * from './wheel'; // WheelSpinner

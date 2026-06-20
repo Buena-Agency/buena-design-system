@@ -65,6 +65,17 @@ import {
   DataTable,
   Calendar,
   Carousel,
+  Sparkline,
+  ProgressRing,
+  StackedBar,
+  BarChart,
+  ActivityHeatmap,
+  MetricCard,
+  ProfileCard,
+  MediaCard,
+  EventCard,
+  Leaderboard,
+  WheelSpinner,
 } from '../components';
 import {
   IconSearch,
@@ -110,6 +121,7 @@ function Sink() {
   const [view, setView] = useState('list');
   const [acc, setAcc] = useState(true);
   const [slide, setSlide] = useState(0);
+  const [winner, setWinner] = useState<number | null>(null);
 
   return (
     <Stack gap="xl" style={{ padding: 28, background: 'var(--color-bg-low)', minHeight: '100%' }}>
@@ -405,7 +417,7 @@ function Sink() {
 
       <Section title="Calendar + carousel (organism)">
         <Inline gap="lg" align="flex-start" wrap>
-          <Calendar month={5} year={2026} selected={20} />
+          <Calendar month={5} year={2026} selected={20} events={[3, 12, 20, 26]} />
           <div style={{ width: 220 }}>
             <Carousel index={slide} onIndexChange={setSlide}>
               <Card variant="solid" style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
@@ -418,6 +430,123 @@ function Sink() {
               </Card>
             </Carousel>
           </div>
+        </Inline>
+      </Section>
+
+      <Section title="Charts (atom + molecule)">
+        <Inline gap="lg" align="center" wrap>
+          <ProgressRing value={68}>
+            <Text variant="bodySmall" weight={600}>
+              68%
+            </Text>
+          </ProgressRing>
+          <Sparkline data={[4, 7, 5, 9, 6, 11, 8, 13]} area width={120} height={40} />
+          <StackedBar
+            orientation="vertical"
+            length={140}
+            thickness={26}
+            segments={[
+              { label: 'Sprints', value: 2400, color: 'var(--color-green-700)' },
+              { label: 'Jumps', value: 1900, color: 'var(--color-blue-700)' },
+              { label: 'Throws', value: 1600, color: 'var(--color-orange-700)' },
+              { label: 'Distance', value: 2100, color: 'var(--color-purple-700)' },
+            ]}
+            showLegend
+            showValues
+          />
+        </Inline>
+        <StackedBar
+          segments={[
+            { label: 'Done', value: 18, color: 'var(--color-success)' },
+            { label: 'In progress', value: 7, color: 'var(--color-orange-700)' },
+            { label: 'Review', value: 4, color: 'var(--color-yellow-400)' },
+            { label: 'Blocked', value: 2, color: 'var(--color-error)' },
+          ]}
+          showLegend
+        />
+        <Inline gap="xl" align="flex-end" wrap>
+          <div style={{ width: 240 }}>
+            <BarChart
+              data={[
+                { label: 'Mon', value: 8 },
+                { label: 'Tue', value: 12 },
+                { label: 'Wed', value: 6 },
+                { label: 'Thu', value: 15 },
+                { label: 'Fri', value: 10 },
+              ]}
+              orientation="vertical"
+              height={120}
+            />
+          </div>
+          <div style={{ width: 260 }}>
+            <BarChart
+              data={[
+                { label: 'Camila', value: 92 },
+                { label: 'Doug', value: 74 },
+                { label: 'Brayan', value: 58 },
+              ]}
+            />
+          </div>
+          <ActivityHeatmap weeks={12} values={Array.from({ length: 84 }, (_, i) => (i * 7) % 5)} />
+        </Inline>
+      </Section>
+
+      <Section title="Cards (molecule)">
+        <Inline gap="lg" align="flex-start" wrap>
+          <MetricCard label="Revenue" value="$48.2k" icon={IconStar} delta={{ direction: 'up', label: '12%' }} trend={[3, 5, 4, 7, 6, 9, 8, 12]} />
+          <MetricCard label="Churn" value="1.4%" icon={IconBell} delta={{ direction: 'down', label: '0.3pt' }} trend={[9, 8, 8, 6, 7, 5, 4, 3]} />
+          <ProfileCard
+            name="Camila"
+            role="Captain"
+            avatar={{ initials: 'CA' }}
+            stats={[
+              { label: 'Wins', value: 12 },
+              { label: 'Streak', value: 5 },
+              { label: 'Rank', value: '#1' },
+            ]}
+            action={<Button variant="secondary" size="sm">View</Button>}
+          />
+          <MediaCard
+            media={<span>🏝️</span>}
+            title="Island retreat"
+            description="A weekend off-season trip for the whole team."
+            footer={<Badge tone="success">Booked</Badge>}
+          />
+        </Inline>
+        <EventCard media={<span>🏆</span>} date="SAT · JUN 27" title="Hayward Classic" time="10:00 AM" location="Eugene, OR" />
+      </Section>
+
+      <Section title="Leaderboard + Winner Spinner (organism)">
+        <Inline gap="xl" align="flex-start" wrap>
+          <div style={{ width: 320 }}>
+            <Leaderboard
+              showBars
+              header={<Text variant="caption" color="third" style={{ textTransform: 'uppercase', letterSpacing: '0.06em' }}>This week</Text>}
+              entries={[
+                { name: 'Camila', value: '285 pts', amount: 285, avatar: { initials: 'CA' }, color: 'var(--color-yellow-400)', trend: [2, 4, 5, 7, 9, 12] },
+                { name: 'Doug', value: '240 pts', amount: 240, avatar: { initials: 'DO' }, color: 'var(--color-blue-700)', trend: [1, 3, 4, 6, 7, 9], you: true },
+                { name: 'Brayan', value: '180 pts', amount: 180, avatar: { initials: 'BR' }, color: 'var(--color-purple-700)', trend: [2, 2, 3, 4, 5, 6] },
+                { name: 'Nicole', value: '120 pts', amount: 120, avatar: { initials: 'NI' }, color: 'var(--color-orange-700)', trend: [1, 1, 2, 3, 3, 4] },
+              ]}
+            />
+          </div>
+          <Stack gap="md" align="center">
+            <WheelSpinner
+              size={220}
+              selectedIndex={winner}
+              segments={[
+                { color: 'var(--color-purple-700)', emoji: '🍰' },
+                { color: 'var(--color-blue-700)', emoji: '☕' },
+                { color: 'var(--color-yellow-400)', emoji: '🏝️' },
+                { color: 'var(--color-orange-700)', emoji: '🥪' },
+                { color: 'var(--color-green-700)', emoji: '🍕' },
+                { color: 'var(--color-red-700)', emoji: '🎁' },
+              ]}
+            />
+            <Button variant="accent" onClick={() => setWinner(Math.floor(Math.random() * 6))}>
+              Spin
+            </Button>
+          </Stack>
         </Inline>
       </Section>
     </Stack>

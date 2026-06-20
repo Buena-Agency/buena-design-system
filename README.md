@@ -14,7 +14,7 @@ for the install checklist and the `CLAUDE.md` rule to paste into the app.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.5.0
+npm install github:Buena-Agency/buena-design-system#v0.6.0
 ```
 
 npm clones the repo, runs the `prepare` script to build `dist/lib`,
@@ -41,7 +41,7 @@ import { IconSettings } from '@buena/brand/icons';
 
 ## What's exported
 
-v0.5.0 exposes:
+v0.6.0 exposes:
 
 - **`@buena/brand/components`** — React components organized by atomic-design
   layer (`src/components/atoms`, `/molecules`, `/organisms`). Molecules compose
@@ -50,18 +50,22 @@ v0.5.0 exposes:
     `Inline`, `Divider`, `VisuallyHidden`, `Card`, `Button`, `IconButton`,
     `Pill`, `Label`, `Input`, `Textarea`, `Checkbox`, `Radio`, `Switch`,
     `Badge`, `Chip`, `Tag`, `Avatar`, `StatusDot`, `Spinner`, `Skeleton`,
-    `Slider`, `ProgressBar`, `ColorSwatch`.
+    `Slider`, `ProgressBar`, `ColorSwatch`, `Sparkline`, `ProgressRing`, `Meter`.
   - **Molecules:** `Field`, `Alert`, `Banner`, `Toast`, `Tooltip`, `Tabs`/`Tab`,
     `Breadcrumb`, `Pagination`, `SegmentedControl`, `MenuItem`, `ListItem`,
     `ButtonGroup`, `AvatarGroup`, `SearchInput`, `Stat`, `Select`, `Stepper`,
     `DateField`, `ColorPicker`, `FileDropzone`, `InlineEdit`, `Rating`,
     `StatComparison`, `ProgressSteps`, `Accordion`, `DataTableRow`,
     `NotificationItem`, `MediaControls`, `CodeBlock`, `NavItem`, `Toolbar`,
-    `TabsBar`, `TreeItem`.
+    `TabsBar`, `TreeItem`, `StackedBar`, `BarChart`, `ActivityHeatmap`,
+    `MetricCard`, `ProfileCard`, `MediaCard`, `EventCard`, `LeaderboardRow`.
   - **Organisms:** `Menu` (+ `MenuDivider`, `MenuLabel`), `Dropdown`, `Modal`,
     `EmptyState`, `Combobox`, `Multiselect`, `DataTable`, `Sidebar`
     (+ `SidebarSection`), `TopAppBar`, `Tray`, `BottomSheet`, `CommandPalette`,
-    `SnackbarQueue`, `NotificationList`, `Carousel`, `Calendar`, `TreeView`.
+    `SnackbarQueue`, `NotificationList`, `Carousel`, `Calendar`, `TreeView`,
+    `Leaderboard`, `WheelSpinner`.
+  - **Charts** read from `CHART_COLORS` / `STATUS_COLORS` (categorical + status
+    palettes mapped to ramp tokens).
 
   `Text` keys to the type scale (`variant="title1"`), `Icon` standardizes
   size/color over the SVG set, and every component resolves to the CSS

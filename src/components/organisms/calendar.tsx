@@ -19,11 +19,14 @@ export interface CalendarProps {
   onSelect?: (day: number) => void;
   onPrev?: () => void;
   onNext?: () => void;
+  /** Days (1-based) that show an event dot. */
+  events?: number[];
   className?: string;
 }
 
 /** Month calendar = Surface + header (Text + IconButtons) + a grid of day cells. */
-export function Calendar({ month, year, selected, onSelect, onPrev, onNext, className }: CalendarProps) {
+export function Calendar({ month, year, selected, onSelect, onPrev, onNext, events, className }: CalendarProps) {
+  const eventSet = new Set(events);
   const firstWeekday = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const cells: (number | null)[] = [
@@ -66,6 +69,7 @@ export function Calendar({ month, year, selected, onSelect, onPrev, onNext, clas
               <Text variant="bodySmall" color="inherit">
                 {d}
               </Text>
+              {eventSet.has(d) && <span className="bds-calendar__dot" />}
             </button>
           )
         )}

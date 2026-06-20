@@ -7,3 +7,6 @@ export * from './group'; // ButtonGroup, AvatarGroup, SearchInput, Stat
 export * from './forms'; // Select, Stepper, DateField, ColorPicker, FileDropzone, InlineEdit, Rating
 export * from './display'; // StatComparison, ProgressSteps, Accordion, DataTableRow, NotificationItem, MediaControls, CodeBlock
 export * from './chrome'; // NavItem, Toolbar, ToolbarDivider, TabsBar, TreeItem
+export * from './charts'; // StackedBar, BarChart, ActivityHeatmap
+export * from './cards'; // MetricCard, ProfileCard, MediaCard, EventCard
+export * from './leaderboard'; // LeaderboardRow
