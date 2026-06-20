@@ -9,6 +9,6 @@
     "allowImportingTsExtensions": false,
     "types": []
   },
-  "include": ["src/tokens", "src/icons", "src/index.ts"],
+  "include": ["src/tokens", "src/icons", "src/components", "src/tailwind", "src/index.ts"],
   "exclude": ["src/showcase"]
 }

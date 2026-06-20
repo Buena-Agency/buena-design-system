@@ -1,6 +1,6 @@
 {
   "name": "@buena/brand",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "main": "./dist/lib/index.js",
@@ -19,10 +19,21 @@
       "types": "./dist/lib/icons/index.d.ts",
       "import": "./dist/lib/icons.js"
     },
-    "./styles.css": "./dist/lib/brand.css"
+    "./components": {
+      "types": "./dist/lib/components/index.d.ts",
+      "import": "./dist/lib/components.js"
+    },
+    "./tailwind": {
+      "types": "./dist/lib/tailwind/preset.d.ts",
+      "import": "./dist/lib/tailwind.js"
+    },
+    "./styles.css": "./dist/lib/brand.css",
+    "./components.css": "./dist/lib/components.css",
+    "./stylelint": "./stylelint-config.json"
   },
   "files": [
-    "dist/lib"
+    "dist/lib",
+    "stylelint-config.json"
   ],
   "scripts": {
     "dev": "vite",

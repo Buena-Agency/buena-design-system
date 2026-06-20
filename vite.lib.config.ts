@@ -15,12 +15,16 @@ export default defineConfig({
   plugins: [
     react(),
     {
-      name: 'copy-brand-css',
+      name: 'copy-css',
       closeBundle() {
         mkdirSync(resolve(__dirname, 'dist/lib'), { recursive: true });
         copyFileSync(
           resolve(__dirname, 'src/styles/brand.css'),
           resolve(__dirname, 'dist/lib/brand.css')
+        );
+        copyFileSync(
+          resolve(__dirname, 'src/components/components.css'),
+          resolve(__dirname, 'dist/lib/components.css')
         );
       },
     },
@@ -34,6 +38,8 @@ export default defineConfig({
         index: resolve(__dirname, 'src/index.ts'),
         tokens: resolve(__dirname, 'src/tokens/index.ts'),
         icons: resolve(__dirname, 'src/icons/index.tsx'),
+        components: resolve(__dirname, 'src/components/index.ts'),
+        tailwind: resolve(__dirname, 'src/tailwind/preset.ts'),
       },
       formats: ['es'],
       fileName: (_format, entryName) => `${entryName}.js`,

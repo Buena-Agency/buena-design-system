@@ -1,28 +1,190 @@
 /*
- * Brand skinning layer. v0.1 exposes only the accent color pair as CSS
- * variables; the full token surface (ramps, semantic tokens) lives in
- * `@buena/brand/tokens` as JS constants. As consuming apps need to
- * override more, promote individual tokens into this file.
+ * @buena/brand — token surface.
  *
- * Consuming apps opt in by setting the attribute on <html>:
- *   <html data-brand="atho">
+ * The single CSS contract every Buena app consumes. Import once in your
+ * app entry:
+ *     import '@buena/brand/styles.css';
+ * and set the theme (and optional brand skin) on <html>:
+ *     <html data-theme="dark" data-brand="atho">
  *
- * Defaults (no data-brand attribute) match the Atho skin so the
- * showcase renders correctly out of the box.
+ * Three layers live here:
+ *   1. Ramp primitives        — raw hand-tuned hex, constant across themes
+ *   2. Semantic tokens         — bg-*, text-*, border-*, … flip per data-theme
+ *   3. Spacing / radius / type — the 8pt grid, corner scale, Satoshi type scale
+ *   4. Brand accent skin       — --color-accent[-deep], per data-brand
+ *
+ * Token values are generated from src/tokens/index.ts — keep them in sync
+ * (tokens.ts is canonical; this file mirrors it for runtime CSS).
  */
 
 :root {
-  --color-accent: #a7be5a;
-  --color-accent-deep: #80ac1a;
+  /* ── Ramp primitives (constant across themes) ───────────────── */
+  --color-neutral-100: #ffffff;
+  --color-neutral-200: #f7f5ee;
+  --color-neutral-300: #ece8dc;
+  --color-neutral-400: #b5b0a1;
+  --color-neutral-500: #62635f;
+  --color-neutral-600: #2a2d34;
+  --color-neutral-700: #1c2027;
+  --color-neutral-800: #15181c;
+  --color-neutral-900: #0f1115;
+
+  --color-green-100: #f4f7e5;
+  --color-green-200: #e6efc2;
+  --color-green-300: #d4e69d;
+  --color-green-400: #c3dc7c;
+  --color-green-500: #b3cd66;
+  --color-green-600: #adc55f;
+  --color-green-700: #a7be5a;
+  --color-green-800: #95b83c;
+  --color-green-900: #80ac1a;
+
+  --color-yellow-100: #fae299;
+  --color-yellow-200: #fbe587;
+  --color-yellow-300: #fce574;
+  --color-yellow-400: #fde25e;
+  --color-yellow-500: #fedd49;
+  --color-yellow-600: #ffd93b;
+  --color-yellow-700: #ffda35;
+  --color-yellow-800: #f0c00a;
+  --color-yellow-900: #d9a000;
+
+  --color-orange-100: #fbe6d8;
+  --color-orange-200: #f8d2b6;
+  --color-orange-300: #f4be94;
+  --color-orange-400: #f0aa73;
+  --color-orange-500: #ee9d60;
+  --color-orange-600: #ed9658;
+  --color-orange-700: #ed9356;
+  --color-orange-800: #e27530;
+  --color-orange-900: #d45810;
+
+  --color-red-100: #fae0dd;
+  --color-red-200: #f4c0bb;
+  --color-red-300: #ee9f99;
+  --color-red-400: #e87d77;
+  --color-red-500: #e26861;
+  --color-red-600: #df5f55;
+  --color-red-700: #de594f;
+  --color-red-800: #d43a2e;
+  --color-red-900: #c61708;
+
+  --color-blue-100: #dde9f0;
+  --color-blue-200: #bbd2e0;
+  --color-blue-300: #99bbd0;
+  --color-blue-400: #7da8c0;
+  --color-blue-500: #6e9bb6;
+  --color-blue-600: #6796b2;
+  --color-blue-700: #6493b0;
+  --color-blue-800: #3d7ca1;
+  --color-blue-900: #1a6390;
+
+  --color-purple-100: #f8e1ee;
+  --color-purple-200: #edc1da;
+  --color-purple-300: #e2a2c6;
+  --color-purple-400: #da82b5;
+  --color-purple-500: #d76caa;
+  --color-purple-600: #d762a6;
+  --color-purple-700: #d75ba1;
+  --color-purple-800: #c43387;
+  --color-purple-900: #a8156d;
+
+  /* ── Spacing (8pt grid + 4pt half step) ─────────────────────── */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  /* ── Radius ──────────────────────────────────────────────────── */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* ── Type (Satoshi scale, Apple-HIG inspired) ───────────────── */
+  --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
+  --text-large-title: 500 34px/40px var(--font-sans);
+  --text-title-1: 500 28px/32px var(--font-sans);
+  --text-title-2: 500 22px/28px var(--font-sans);
+  --text-title-3: 500 20px/24px var(--font-sans);
+  --text-callout: 400 17px/22px var(--font-sans);
+  --text-body: 400 15px/20px var(--font-sans);
+  --text-body-small: 400 13px/18px var(--font-sans);
+  --text-caption: 500 12px/16px var(--font-sans);
+  --text-footnote: 500 11px/14px var(--font-sans);
+
+  /* ── Brand accent skin (override per data-brand below) ──────── */
+  --color-accent: var(--color-green-700);
+  --color-accent-deep: var(--color-green-900);
 }
 
+/* ── Semantic tokens — Dark (default) ─────────────────────────── */
+:root,
+:root[data-theme='dark'] {
+  --color-bg-low: var(--color-neutral-900);
+  --color-bg-med: var(--color-neutral-800);
+  --color-bg-high: var(--color-neutral-700);
+  --color-text-primary: var(--color-neutral-100);
+  --color-text-second: var(--color-neutral-300);
+  --color-text-third: var(--color-neutral-500);
+  --color-border-primary: var(--color-neutral-100);
+  --color-border-second: var(--color-neutral-400);
+  --color-border-third: var(--color-neutral-500);
+  --color-button-bg-primary: var(--color-neutral-100);
+  --color-button-bg-second: var(--color-neutral-800);
+  --color-button-bg-third: transparent;
+  --color-icon: var(--color-neutral-300);
+  --color-focus-ring: var(--color-neutral-100);
+  --color-overlay: rgba(0, 0, 0, 0.6);
+  --color-on-accent: #0f1115;
+  --color-success: var(--color-green-700);
+  --color-warning: var(--color-yellow-400);
+  --color-error: var(--color-red-700);
+  --color-info: var(--color-blue-700);
+  color-scheme: dark;
+}
+
+/* ── Semantic tokens — Light ──────────────────────────────────── */
+:root[data-theme='light'] {
+  --color-bg-low: var(--color-neutral-100);
+  --color-bg-med: var(--color-neutral-200);
+  --color-bg-high: var(--color-neutral-300);
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-second: var(--color-neutral-700);
+  --color-text-third: var(--color-neutral-500);
+  --color-border-primary: var(--color-neutral-900);
+  --color-border-second: var(--color-neutral-400);
+  --color-border-third: var(--color-neutral-500);
+  --color-button-bg-primary: var(--color-neutral-900);
+  --color-button-bg-second: var(--color-neutral-200);
+  --color-button-bg-third: transparent;
+  --color-icon: var(--color-neutral-700);
+  --color-focus-ring: var(--color-neutral-900);
+  --color-overlay: rgba(15, 17, 21, 0.45);
+  --color-on-accent: #0f1115;
+  --color-success: var(--color-green-700);
+  --color-warning: var(--color-yellow-400);
+  --color-error: var(--color-red-700);
+  --color-info: var(--color-blue-700);
+  color-scheme: light;
+}
+
+/* ── Brand accent skins (opt in via data-brand on <html>) ─────── */
 :root[data-brand='atho'] {
-  --color-accent: #a7be5a;
-  --color-accent-deep: #80ac1a;
+  --color-accent: var(--color-green-700);
+  --color-accent-deep: var(--color-green-900);
 }
 
 :root[data-brand='carespace'] {
   /* Placeholder until Carespace picks their accent. */
-  --color-accent: #6493b0;
-  --color-accent-deep: #1a6390;
+  --color-accent: var(--color-blue-700);
+  --color-accent-deep: var(--color-blue-900);
 }

@@ -1,0 +1,16 @@
+{
+  "rules": {
+    "color-no-hex": [
+      true,
+      {
+        "message": "Use a Buena token (var(--color-...)) or the Tailwind preset instead of a raw hex value"
+      }
+    ],
+    "color-named": [
+      "never",
+      {
+        "message": "Use a Buena token (var(--color-...)) instead of a named color"
+      }
+    ]
+  }
+}
