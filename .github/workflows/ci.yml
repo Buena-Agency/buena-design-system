@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build library (typechecks via tsc)
+        run: npm run build:lib
+      - name: WCAG AA contrast gate
+        run: npm run check:contrast
+      - name: Token pipeline (DTCG + CSS/iOS/Android)
+        run: npm run build:tokens
+      - name: Build showcase
+        run: npm run build

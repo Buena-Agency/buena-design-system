@@ -10,3 +10,12 @@
 export * from './atoms';
 export * from './molecules';
 export * from './organisms';
+// A11y hooks for building your own overlays/menus on-system.
+export {
+  useDialog,
+  useEscape,
+  useOutsideClick,
+  useScrollLock,
+  useMenuKeyboard,
+  getFocusable,
+} from './a11y';

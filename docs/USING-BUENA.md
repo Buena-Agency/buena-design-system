@@ -7,7 +7,7 @@ so the agent reaches for the system by default, then follow the checklist.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.4.0
+npm install github:Buena-Agency/buena-design-system#v0.5.0
 ```
 
 ## New-app checklist

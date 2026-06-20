@@ -1,9 +1,11 @@
+import { useRef } from 'react';
 import type { ReactNode, MouseEvent } from 'react';
 import { Surface, Inline } from '../atoms/layout';
 import { Text } from '../atoms/typography';
 import { IconButton } from '../atoms/button';
 import { Icon } from '../atoms/icon';
 import { IconClose } from '../../icons';
+import { useDialog } from '../a11y';
 import { cx } from '../cx';
 
 export interface ModalProps {
@@ -20,9 +22,11 @@ export interface ModalProps {
  * and Icon atoms for the header. Footer takes Button atoms.
  */
 export function Modal({ open, onClose, title, footer, children, className }: ModalProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useDialog(ref, open, onClose);
   if (!open) return null;
   return (
-    <div className="bds-modal-overlay" onClick={onClose}>
+    <div className="bds-modal-overlay" ref={ref} onClick={onClose}>
       <Surface
         level="med"
         radius="2xl"

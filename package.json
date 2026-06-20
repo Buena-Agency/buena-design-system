@@ -1,6 +1,6 @@
 {
   "name": "@buena/brand",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "main": "./dist/lib/index.js",
@@ -29,16 +29,20 @@
     },
     "./styles.css": "./dist/lib/brand.css",
     "./components.css": "./dist/lib/components.css",
-    "./stylelint": "./stylelint-config.json"
+    "./stylelint": "./stylelint-config.json",
+    "./design-tokens.json": "./tokens/buena.tokens.json"
   },
   "files": [
     "dist/lib",
+    "tokens/buena.tokens.json",
     "stylelint-config.json"
   ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "build:tokens": "npm run build:lib && node scripts/build-tokens.mjs && node scripts/build-platforms.mjs",
+    "check:contrast": "node scripts/check-contrast.mjs",
     "prepare": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
     "typecheck": "tsc -b"
   },
@@ -58,6 +62,7 @@
     "postcss": "^8.4.39",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "style-dictionary": "^4.4.0",
     "tailwindcss": "^3.4.6",
     "typescript": "^5.5.3",
     "vite": "^5.3.4"

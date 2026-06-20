@@ -61,6 +61,38 @@ export const RADIUS = {
   full: 9999,
 } as const;
 
+// ── Motion ─────────────────────────────────────────────────────
+// Durations in ms; easings as CSS timing functions. Components reference
+// these via --motion-* / --ease-* so an app can retune feel in one place,
+// and prefers-reduced-motion collapses the durations to 0.
+
+export const MOTION = {
+  duration: {
+    instant: 0,
+    fast: 120,
+    normal: 200,
+    slow: 320,
+  },
+  easing: {
+    standard: 'cubic-bezier(0.2, 0, 0, 1)',
+    emphasized: 'cubic-bezier(0.3, 0, 0, 1)',
+    decelerate: 'cubic-bezier(0, 0, 0, 1)',
+    accelerate: 'cubic-bezier(0.3, 0, 1, 1)',
+  },
+} as const;
+
+// ── Density ────────────────────────────────────────────────────
+// A comfortable (default) and a compact mode. Controls reference
+// --control-height / --field-height / --row-pad-y; flip with
+// data-density="compact" on any ancestor.
+
+export const DENSITY = {
+  comfortable: { 'control-height': 36, 'field-height': 40, 'row-pad-y': 7 },
+  compact: { 'control-height': 30, 'field-height': 34, 'row-pad-y': 4 },
+} as const;
+
+export type DensityMode = keyof typeof DENSITY;
+
 // ── Color ramps ─────────────────────────────────────────────────
 
 export const RAMP_STEPS = [100, 200, 300, 400, 500, 600, 700, 800, 900] as const;

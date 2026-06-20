@@ -9,7 +9,7 @@
  * like `bg-bg-med` / `text-text-primary` flip with `data-theme` and re-skin
  * with `data-brand` at runtime.
  */
-import { RAMPS, RAMP_STEPS, SPACING, RADIUS, TYPE_SCALE, rampValue } from '../tokens';
+import { RAMPS, RAMP_STEPS, SPACING, RADIUS, TYPE_SCALE, MOTION, rampValue } from '../tokens';
 import type { RampFamily } from '../tokens';
 
 const rampColors: Record<string, Record<string, string>> = {};
@@ -32,6 +32,11 @@ for (const [k, t] of Object.entries(TYPE_SCALE)) {
   fontSize[k] = [`${t.size}px`, { lineHeight: `${t.leading}px`, letterSpacing: `${t.letter}px` }];
 }
 
+const transitionDuration: Record<string, string> = {};
+for (const [k, ms] of Object.entries(MOTION.duration)) transitionDuration[k] = `${ms}ms`;
+
+const transitionTimingFunction: Record<string, string> = { ...MOTION.easing };
+
 export const preset = {
   theme: {
     extend: {
@@ -52,6 +57,8 @@ export const preset = {
       borderRadius,
       fontFamily: { sans: ['Satoshi', 'Inter', 'system-ui', 'sans-serif'] },
       fontSize,
+      transitionDuration,
+      transitionTimingFunction,
     },
   },
 };

@@ -1,9 +1,11 @@
+import { useRef } from 'react';
 import type { HTMLAttributes, ReactNode, MouseEvent } from 'react';
 import { Surface, Inline, Divider } from '../atoms/layout';
 import { Text } from '../atoms/typography';
 import { IconButton } from '../atoms/button';
 import { Icon } from '../atoms/icon';
 import { IconClose, IconSearch } from '../../icons';
+import { useDialog, useMenuKeyboard } from '../a11y';
 import { cx } from '../cx';
 
 const stop = (e: MouseEvent) => e.stopPropagation();
@@ -19,9 +21,11 @@ export interface TrayProps {
 
 /** Slide-in side tray = overlay + Surface panel (header composes atoms). */
 export function Tray({ open, onClose, side = 'right', title, children, className }: TrayProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useDialog(ref, open, onClose);
   if (!open) return null;
   return (
-    <div className="bds-tray-overlay" onClick={onClose}>
+    <div className="bds-tray-overlay" ref={ref} onClick={onClose}>
       <Surface
         level="med"
         radius="none"
@@ -61,9 +65,11 @@ export interface BottomSheetProps {
 
 /** Bottom sheet = overlay + Surface rising from the bottom edge. */
 export function BottomSheet({ open, onClose, title, children, className }: BottomSheetProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  useDialog(ref, open, onClose);
   if (!open) return null;
   return (
-    <div className="bds-sheet-overlay" onClick={onClose}>
+    <div className="bds-sheet-overlay" ref={ref} onClick={onClose}>
       <Surface level="med" radius="2xl" shadow role="dialog" aria-modal="true" className={cx('bds-sheet', className)} onClick={stop}>
         <div className="bds-sheet__handle" />
         {title && (
@@ -97,10 +103,15 @@ export function CommandPalette({
   children,
   className,
 }: CommandPaletteProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const surfaceRef = useRef<HTMLDivElement>(null);
+  useDialog(ref, open, onClose);
+  useMenuKeyboard(surfaceRef, open);
   if (!open) return null;
   return (
-    <div className="bds-cmdk-overlay" onClick={onClose}>
-      <Surface level="med" radius="xl" shadow border role="dialog" aria-modal="true" className={cx('bds-cmdk', className)} onClick={stop}>
+    <div className="bds-cmdk-overlay" ref={ref} onClick={onClose}>
+      <div ref={surfaceRef}>
+        <Surface level="med" radius="xl" shadow border role="dialog" aria-modal="true" className={cx('bds-cmdk', className)} onClick={stop}>
         <div className="bds-cmdk__search">
           <Icon icon={IconSearch} size="sm" color="var(--color-text-third)" />
           <input
@@ -115,7 +126,8 @@ export function CommandPalette({
         <div className="bds-cmdk__results" role="listbox">
           {children}
         </div>
-      </Surface>
+        </Surface>
+      </div>
     </div>
   );
 }

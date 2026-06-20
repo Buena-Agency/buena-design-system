@@ -190,3 +190,39 @@
   --color-accent: var(--color-blue-700);
   --color-accent-deep: var(--color-blue-900);
 }
+
+/* ── Motion ───────────────────────────────────────────────────── */
+:root {
+  --motion-instant: 0ms;
+  --motion-fast: 120ms;
+  --motion-normal: 200ms;
+  --motion-slow: 320ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --ease-decelerate: cubic-bezier(0, 0, 0, 1);
+  --ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+}
+
+/* Honour the OS "reduce motion" setting — collapse every duration. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-instant: 0ms;
+    --motion-fast: 0ms;
+    --motion-normal: 0ms;
+    --motion-slow: 0ms;
+  }
+}
+
+/* ── Density ───────────────────────────────────────────────────── */
+/* Comfortable is the default; data-density="compact" on any ancestor
+   tightens control heights + row padding for dense, data-heavy UIs. */
+:root {
+  --control-height: 36px;
+  --field-height: 40px;
+  --row-pad-y: 7px;
+}
+[data-density='compact'] {
+  --control-height: 30px;
+  --field-height: 34px;
+  --row-pad-y: 4px;
+}

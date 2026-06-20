@@ -3,6 +3,7 @@ export * from './menu'; // Menu, MenuDivider, MenuLabel
 export * from './modal'; // Modal
 export * from './empty-state'; // EmptyState
 export * from './combobox'; // Combobox, Multiselect
+export * from './dropdown'; // Dropdown
 export * from './datatable'; // DataTable
 export * from './app-chrome'; // Sidebar, SidebarSection, TopAppBar
 export * from './overlays'; // Tray, BottomSheet, CommandPalette, SnackbarQueue, NotificationList

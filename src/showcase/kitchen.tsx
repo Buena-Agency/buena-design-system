@@ -440,7 +440,12 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')!).render(
+// Reuse a single root across HMR updates so Fast Refresh doesn't call
+// createRoot twice on the same container (which blanks the page).
+const el = document.getElementById('root')!;
+const store = window as unknown as { __bdsKitchenRoot?: ReturnType<typeof createRoot> };
+const root = store.__bdsKitchenRoot ?? (store.__bdsKitchenRoot = createRoot(el));
+root.render(
   <StrictMode>
     <App />
   </StrictMode>

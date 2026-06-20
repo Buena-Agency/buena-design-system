@@ -14,7 +14,7 @@ for the install checklist and the `CLAUDE.md` rule to paste into the app.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.4.0
+npm install github:Buena-Agency/buena-design-system#v0.5.0
 ```
 
 npm clones the repo, runs the `prepare` script to build `dist/lib`,
@@ -41,7 +41,7 @@ import { IconSettings } from '@buena/brand/icons';
 
 ## What's exported
 
-v0.4.0 exposes:
+v0.5.0 exposes:
 
 - **`@buena/brand/components`** — React components organized by atomic-design
   layer (`src/components/atoms`, `/molecules`, `/organisms`). Molecules compose
@@ -58,14 +58,19 @@ v0.4.0 exposes:
     `StatComparison`, `ProgressSteps`, `Accordion`, `DataTableRow`,
     `NotificationItem`, `MediaControls`, `CodeBlock`, `NavItem`, `Toolbar`,
     `TabsBar`, `TreeItem`.
-  - **Organisms:** `Menu` (+ `MenuDivider`, `MenuLabel`), `Modal`, `EmptyState`,
-    `Combobox`, `Multiselect`, `DataTable`, `Sidebar` (+ `SidebarSection`),
-    `TopAppBar`, `Tray`, `BottomSheet`, `CommandPalette`, `SnackbarQueue`,
-    `NotificationList`, `Carousel`, `Calendar`, `TreeView`.
+  - **Organisms:** `Menu` (+ `MenuDivider`, `MenuLabel`), `Dropdown`, `Modal`,
+    `EmptyState`, `Combobox`, `Multiselect`, `DataTable`, `Sidebar`
+    (+ `SidebarSection`), `TopAppBar`, `Tray`, `BottomSheet`, `CommandPalette`,
+    `SnackbarQueue`, `NotificationList`, `Carousel`, `Calendar`, `TreeView`.
 
   `Text` keys to the type scale (`variant="title1"`), `Icon` standardizes
   size/color over the SVG set, and every component resolves to the CSS
   variables — so they flip with `data-theme` and re-skin with `data-brand`.
+  Overlays (`Modal`, `Tray`, `BottomSheet`, `CommandPalette`) trap focus, lock
+  scroll, and close on Escape; `Dropdown`/`Menu`/`Combobox` rove with arrows.
+- **A11y hooks** — `useDialog`, `useEscape`, `useOutsideClick`, `useScrollLock`,
+  `useMenuKeyboard`, `getFocusable` (from `@buena/brand/components`) for building
+  your own overlays/menus on-system.
 - **`@buena/brand/styles.css`** — the full token surface as CSS variables:
   ramp primitives (`--color-green-700`), semantic tokens that flip per
   `data-theme` (`--color-bg-med`, `--color-text-primary`, …), spacing
@@ -83,7 +88,27 @@ v0.4.0 exposes:
   `bg-accent`, etc.
 - **`@buena/brand/stylelint`** — a shareable stylelint config that blocks raw
   hex / named colors in app CSS, so off-token values fail lint.
+- **`@buena/brand/design-tokens.json`** — the canonical token source as a W3C
+  DTCG file (primitives, semantic light/dark as aliases, spacing, radius, type,
+  motion). The interchange format for non-web platforms.
 - **`@buena/brand`** — re-export of tokens + icons + components for convenience.
+
+### Motion & density
+
+`styles.css` also defines **motion** (`--motion-fast/normal/slow`,
+`--ease-standard/emphasized/…`; collapsed to 0 under `prefers-reduced-motion`)
+and **density** — set `data-density="compact"` on any ancestor to tighten
+control heights and row padding (`--control-height`, `--field-height`,
+`--row-pad-y`). Both are also in `@buena/brand/tokens` (`MOTION`, `DENSITY`) and
+the Tailwind preset (`duration-fast`, `ease-standard`).
+
+### One token source, many platforms
+
+`src/tokens` is the source of truth. `npm run build:tokens` regenerates the DTCG
+file and, via **Style Dictionary**, emits `dist/tokens/{buena-tokens.css,
+BuenaTokens.swift, buena_colors.xml, buena_dimens.xml}` — so iOS and Android
+build from the same tokens as web + the Tailwind preset. `npm run check:contrast`
+gates the semantic text/background pairs at WCAG AA; CI runs both.
 
 ## Consumed by
 
