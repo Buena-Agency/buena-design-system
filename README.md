@@ -14,7 +14,7 @@ for the install checklist and the `CLAUDE.md` rule to paste into the app.
 ## Install
 
 ```sh
-npm install github:Buena-Agency/buena-design-system#v0.3.0
+npm install github:Buena-Agency/buena-design-system#v0.4.0
 ```
 
 npm clones the repo, runs the `prepare` script to build `dist/lib`,
@@ -41,7 +41,7 @@ import { IconSettings } from '@buena/brand/icons';
 
 ## What's exported
 
-v0.2.0 exposes:
+v0.4.0 exposes:
 
 - **`@buena/brand/components`** — React components organized by atomic-design
   layer (`src/components/atoms`, `/molecules`, `/organisms`). Molecules compose
@@ -49,12 +49,19 @@ v0.2.0 exposes:
   - **Atoms:** `Text`, `Link`, `Kbd`, `Code`, `Icon`, `Surface`, `Stack`,
     `Inline`, `Divider`, `VisuallyHidden`, `Card`, `Button`, `IconButton`,
     `Pill`, `Label`, `Input`, `Textarea`, `Checkbox`, `Radio`, `Switch`,
-    `Badge`, `Chip`, `Tag`, `Avatar`, `StatusDot`, `Spinner`, `Skeleton`.
+    `Badge`, `Chip`, `Tag`, `Avatar`, `StatusDot`, `Spinner`, `Skeleton`,
+    `Slider`, `ProgressBar`, `ColorSwatch`.
   - **Molecules:** `Field`, `Alert`, `Banner`, `Toast`, `Tooltip`, `Tabs`/`Tab`,
     `Breadcrumb`, `Pagination`, `SegmentedControl`, `MenuItem`, `ListItem`,
-    `ButtonGroup`, `AvatarGroup`, `SearchInput`, `Stat`.
-  - **Organisms:** `Menu` (+ `MenuItem`, `MenuDivider`, `MenuLabel`), `Modal`,
-    `EmptyState`.
+    `ButtonGroup`, `AvatarGroup`, `SearchInput`, `Stat`, `Select`, `Stepper`,
+    `DateField`, `ColorPicker`, `FileDropzone`, `InlineEdit`, `Rating`,
+    `StatComparison`, `ProgressSteps`, `Accordion`, `DataTableRow`,
+    `NotificationItem`, `MediaControls`, `CodeBlock`, `NavItem`, `Toolbar`,
+    `TabsBar`, `TreeItem`.
+  - **Organisms:** `Menu` (+ `MenuDivider`, `MenuLabel`), `Modal`, `EmptyState`,
+    `Combobox`, `Multiselect`, `DataTable`, `Sidebar` (+ `SidebarSection`),
+    `TopAppBar`, `Tray`, `BottomSheet`, `CommandPalette`, `SnackbarQueue`,
+    `NotificationList`, `Carousel`, `Calendar`, `TreeView`.
 
   `Text` keys to the type scale (`variant="title1"`), `Icon` standardizes
   size/color over the SVG set, and every component resolves to the CSS

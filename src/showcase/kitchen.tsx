@@ -44,6 +44,27 @@ import {
   ButtonGroup,
   EmptyState,
   Modal,
+  Slider,
+  ProgressBar,
+  ColorPicker,
+  Select,
+  Stepper,
+  DateField,
+  Rating,
+  FileDropzone,
+  Accordion,
+  ProgressSteps,
+  StatComparison,
+  CodeBlock,
+  MediaControls,
+  NotificationItem,
+  NavItem,
+  TabsBar,
+  Toolbar,
+  ToolbarDivider,
+  DataTable,
+  Calendar,
+  Carousel,
 } from '../components';
 import {
   IconSearch,
@@ -57,6 +78,12 @@ import {
   IconBell,
   IconFolder,
   IconCheckCircle,
+  IconList,
+  IconGrid,
+  IconColumns,
+  IconCalendar,
+  IconHeart,
+  IconChat,
 } from '../icons';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
@@ -76,6 +103,13 @@ function Sink() {
   const [page, setPage] = useState(2);
   const [q, setQ] = useState('design');
   const [modal, setModal] = useState(false);
+  const [vol, setVol] = useState(60);
+  const [qty, setQty] = useState(2);
+  const [stars, setStars] = useState(4);
+  const [swatch, setSwatch] = useState('var(--color-blue-700)');
+  const [view, setView] = useState('list');
+  const [acc, setAcc] = useState(true);
+  const [slide, setSlide] = useState(0);
 
   return (
     <Stack gap="xl" style={{ padding: 28, background: 'var(--color-bg-low)', minHeight: '100%' }}>
@@ -272,6 +306,119 @@ function Sink() {
         >
           This can't be undone. The modal is a Surface composing Inline, Text, IconButton, and Icon atoms.
         </Modal>
+      </Section>
+
+      <Section title="Form controls (atom + molecule)">
+        <Inline gap="lg" wrap align="center">
+          <Select defaultValue="b">
+            <option value="a">Option A</option>
+            <option value="b">Option B</option>
+          </Select>
+          <Stepper value={qty} onChange={setQty} min={0} max={9} />
+          <Rating value={stars} onChange={setStars} />
+          <DateField />
+        </Inline>
+        <Slider value={vol} onChange={(e) => setVol(Number(e.target.value))} />
+        <ProgressBar value={vol} />
+        <ColorPicker
+          value={swatch}
+          onChange={setSwatch}
+          colors={[
+            'var(--color-green-700)',
+            'var(--color-yellow-400)',
+            'var(--color-orange-700)',
+            'var(--color-red-700)',
+            'var(--color-blue-700)',
+            'var(--color-purple-700)',
+          ]}
+        />
+        <FileDropzone />
+      </Section>
+
+      <Section title="Progress + accordion (molecule)">
+        <ProgressSteps steps={[{ label: 'Cart' }, { label: 'Address' }, { label: 'Pay' }]} current={1} />
+        <Card>
+          <Accordion title="What's included?" open={acc} onToggle={() => setAcc(!acc)}>
+            <Text variant="bodySmall" color="second">
+              Every component composes the atoms — Accordion is a header button + Text + chevron Icon.
+            </Text>
+          </Accordion>
+        </Card>
+        <StatComparison
+          label="This week"
+          primary="$12.4k"
+          secondary="$10.1k"
+          delta={{ direction: 'up', label: '+22%' }}
+        />
+      </Section>
+
+      <Section title="Chrome (molecule + organism)">
+        <Inline gap="lg" align="flex-start" wrap>
+          <Toolbar>
+            <IconButton aria-label="List">
+              <Icon icon={IconList} size="sm" />
+            </IconButton>
+            <IconButton aria-label="Grid">
+              <Icon icon={IconGrid} size="sm" />
+            </IconButton>
+            <ToolbarDivider />
+            <IconButton aria-label="Columns">
+              <Icon icon={IconColumns} size="sm" />
+            </IconButton>
+          </Toolbar>
+          <TabsBar
+            value={view}
+            onChange={setView}
+            tabs={[
+              { value: 'list', icon: IconList, label: 'List' },
+              { value: 'grid', icon: IconGrid, label: 'Grid' },
+            ]}
+          />
+        </Inline>
+        <Card style={{ padding: 0, width: 220 }}>
+          <NavItem icon={IconChat} active>
+            Inbox
+          </NavItem>
+          <NavItem icon={IconBell} badge={<Badge tone="primary">3</Badge>}>
+            Alerts
+          </NavItem>
+          <NavItem icon={IconFolder}>Files</NavItem>
+        </Card>
+      </Section>
+
+      <Section title="Data + media (organism)">
+        <DataTable
+          columns={['Name', 'Role', 'Status']}
+          rows={[
+            ['Doug', 'Founder', <Badge tone="success">Active</Badge>],
+            ['Jane', 'Design', <Badge tone="neutral">Away</Badge>],
+          ]}
+        />
+        <MediaControls playing progress={42} elapsed="1:24" duration="3:08" />
+        <CodeBlock language="tsx" code={'<Button variant="accent">Ship it</Button>'} />
+        <Card style={{ padding: 0 }}>
+          <NotificationItem leading={<Avatar initials="JS" />} title="Jane mentioned you" time="2m" unread>
+            "can you review the tokens?"
+          </NotificationItem>
+        </Card>
+      </Section>
+
+      <Section title="Calendar + carousel (organism)">
+        <Inline gap="lg" align="flex-start" wrap>
+          <Calendar month={5} year={2026} selected={20} />
+          <div style={{ width: 220 }}>
+            <Carousel index={slide} onIndexChange={setSlide}>
+              <Card variant="solid" style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                <Text variant="title3" color="inherit">
+                  Slide 1
+                </Text>
+              </Card>
+              <Card style={{ height: 100, alignItems: 'center', justifyContent: 'center' }}>
+                <Text variant="title3">Slide 2</Text>
+              </Card>
+            </Carousel>
+          </div>
+        </Inline>
       </Section>
     </Stack>
   );
